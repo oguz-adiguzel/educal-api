@@ -27,7 +27,12 @@ cloudinary.config({
 //Connect DB
 
 mongoose
-  .connect(`mongodb+srv://ogzdgzl:${process.env.MONGO_DB_PASSWORD}@cluster0.o4prxt0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
+  .connect(`mongodb+srv://oguzadiguzel:${process.env.MONGO_DB_PASSWORD}@educal.tqhpwq9.mongodb.net/?retryWrites=true&w=majority&appName=educal`, {
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true,
+    // useFindAndModify: false,
+    // useCreateIndex: true,
+  })
   .then(() => {
     console.log("DB Connected Susccesfuly");
   });
