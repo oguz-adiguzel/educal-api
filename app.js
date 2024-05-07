@@ -9,6 +9,7 @@ const pageRoute = require("./routes/pageRoute");
 const courseRoute = require("./routes/courseRoute");
 const categoryRoute = require("./routes/categoryRoute");
 const userRoute = require("./routes/userRoute");
+const blogRoute = require("./routes/blogRoute")
 const swaggerConfig = require("./swaggerDef");
 const fileUpload = require("express-fileupload");
 // import { v2 as clouidanry } from "cloudinary";
@@ -65,6 +66,7 @@ app.use("/", pageRoute);
 app.use("/courses", courseRoute);
 app.use("/categories", categoryRoute);
 app.use("/users", userRoute);
+app.use('/blog', blogRoute)
 // app.use(
 //   "/api-docs",
 //   swaggerUI.serve,
