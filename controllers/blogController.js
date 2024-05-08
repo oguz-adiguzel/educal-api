@@ -38,3 +38,18 @@ exports.getAllBlog = async (req, res) => {
         console.log('error', error);
       }
 };
+
+exports.getBlog = async (req, res) => {
+  try {
+    const blog = await Blog.findOne({ slug: req.params.slug });
+    res.status(200).json({
+      blog,
+      message: "Blog getirildi",
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      error,
+    });
+  }
+}

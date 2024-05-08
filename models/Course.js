@@ -41,7 +41,6 @@ const CourseSchema = new Schema({
 });
 
 CourseSchema.pre("validate", function (next) {
-  // pre yani kaydetmeden önce yap
   this.slug = slugify(this.name, {
     lower: true,
     strict: true,
