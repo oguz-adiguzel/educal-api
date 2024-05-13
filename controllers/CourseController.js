@@ -192,11 +192,9 @@ exports.updateCourse = async (req, res) => {
 };
 
 exports.getCoursesCount = async (req, res) => {
-  console.log('istek geldi');
   try {
     const courses = await Course.find();
     const count = courses.length;
-    console.log('count', count);
     res
       .status(200)
       .json({ message: "Kurs sayısı getirildi", coursesCount: count });

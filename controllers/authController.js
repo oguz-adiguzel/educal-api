@@ -151,3 +151,37 @@ exports.getTeacherList = async (req, res) => {
     console.log("error", error);
   }
 };
+
+exports.getTeacherCount = async (req, res) => {
+  try {
+    const users = await User.find();
+    const teacher = users.filter((item)=> item.role === 'teacher')
+    const count = teacher.length;
+    res
+      .status(200)
+      .json({ message: "Öğretmen sayısı getirildi", teacherCount: count });
+  } catch (error) {
+    console.log('error', error);
+    res.status(400).json({
+      status: "fail",
+      error,
+    });
+  }
+};
+
+exports.getStudentCount = async (req, res) => {
+  try {
+    const users = await User.find();
+    const students = users.filter((item)=> item.role === 'student')
+    const count = students.length;
+    res
+      .status(200)
+      .json({ message: "Öğrenci sayısı getirildi", studentCount: count });
+  } catch (error) {
+    console.log('error', error);
+    res.status(400).json({
+      status: "fail",
+      error,
+    });
+  }
+};
