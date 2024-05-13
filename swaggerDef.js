@@ -4,9 +4,9 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Smart Edu",
+      title: "Educal Api",
       vercion: "1.0.0",
-      description: "SmartEdu api",
+      description: "Educal Api Docs",
     },
     servers: [
       {

@@ -36,23 +36,23 @@ exports.createCourse = async (req, res) => {
 };
 
 exports.createComment = async (req, res) => {
-  try{
-    const course = await Course.findById(req.body.id)
-  
+  try {
+    const course = await Course.findById(req.body.id);
+
     await course.comments.push({
       userName: req.body.userName,
       userPhoto: req.body.userPhoto,
       date: new Date(),
       title: req.body.title,
       raiting: req.body.raiting,
-      comment: req.body.comment
-    })
-    await course.save()
-    res.status(200).json({message: 'Yorum Eklendi'})
-  }catch(error){
-    console.log('error', error);
+      comment: req.body.comment,
+    });
+    await course.save();
+    res.status(200).json({ message: "Yorum Eklendi" });
+  } catch (error) {
+    console.log("error", error);
   }
-}
+};
 
 exports.getAllCourses = async (req, res) => {
   try {
@@ -148,12 +148,14 @@ exports.releaseCourse = async (req, res) => {
 
 exports.deleteCourse = async (req, res) => {
   try {
-    const deletedCourse = await Course.findOneAndRemove({ slug: req.params.slug });
+    const deletedCourse = await Course.findOneAndRemove({
+      slug: req.params.slug,
+    });
     const students = await User.find({
       role: "student",
       courses: deletedCourse._id,
     });
-    
+
     for (let i = 0; i < students.length; i++) {
       const student = students[i];
       const index = student.courses.indexOf(deletedCourse._id);
@@ -163,7 +165,7 @@ exports.deleteCourse = async (req, res) => {
       }
     }
 
-    res.status(200).json({message : 'Kurs silindi'})
+    res.status(200).json({ message: "Kurs silindi" });
   } catch (error) {
     console.log("error", error);
     res.status(400).json({
@@ -182,6 +184,24 @@ exports.updateCourse = async (req, res) => {
     course.save();
     res.status(200).json({ message: "Kurs güncellendi" });
   } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      error,
+    });
+  }
+};
+
+exports.getCoursesCount = async (req, res) => {
+  console.log('istek geldi');
+  try {
+    const courses = await Course.find();
+    const count = courses.length;
+    console.log('count', count);
+    res
+      .status(200)
+      .json({ message: "Kurs sayısı getirildi", coursesCount: count });
+  } catch (error) {
+    console.log('error', error);
     res.status(400).json({
       status: "fail",
       error,
