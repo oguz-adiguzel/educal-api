@@ -185,3 +185,12 @@ exports.getStudentCount = async (req, res) => {
     });
   }
 };
+
+exports.getAllUser = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json({ message:'Kullanıcılar getirildi', users:users });
+  } catch (error) {
+    res.status(500).json({ message: "Sunucu hatası", status: 500 });
+  }
+};

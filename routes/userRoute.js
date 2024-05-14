@@ -41,6 +41,7 @@ router.route("/login").post(authController.loginUser);
 router.route("/update").put(authController.updateUser);
 router.route("/:id").delete(authController.deleteUser);
 router.route("/profile").get(verifyToken, authController.getUserInfo);
+router.route("/getAllUser").get(authController.getAllUser);
 router.route("/teacherCount").get(authController.getTeacherCount);
 router.route("/studentCount").get(authController.getStudentCount);
 router.route("/getTeacherCourses").get(verifyToken, authController.getTeacherCourses);
