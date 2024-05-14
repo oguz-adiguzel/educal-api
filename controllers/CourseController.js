@@ -23,6 +23,10 @@ exports.createCourse = async (req, res) => {
       photoUrl: result.secure_url,
       videoID: req.body.videoID,
     });
+    const addedCourse = await Course.findOne({ photoUrl: result.secure_url })
+    const user = await User.findById(req.body.user);
+    await user.courses.push({ _id: addedCourse._id });
+    await user.save();
 
     fs.unlinkSync(req.files.image.tempFilePath);
 

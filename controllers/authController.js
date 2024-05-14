@@ -86,7 +86,7 @@ exports.loginUser = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
   try {
-    await User.findByIdAndRemove(req.params.id);
+    await User.findByIdAndDelete(req.params.id);
     await Course.deleteMany({ user: req.params.id });
     res.status(200).json({
       message: "Kullanıcı silindi",
@@ -189,6 +189,8 @@ exports.getStudentCount = async (req, res) => {
 exports.getAllUser = async (req, res) => {
   try {
     const users = await User.find();
+    const courses = await Course.find()
+    console.log('courses', courses);
     res.json({ message:'Kullanıcılar getirildi', users:users });
   } catch (error) {
     res.status(500).json({ message: "Sunucu hatası", status: 500 });
