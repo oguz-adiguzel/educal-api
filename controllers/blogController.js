@@ -53,3 +53,17 @@ exports.getBlog = async (req, res) => {
     });
   }
 }
+
+exports.deleteBlog = async(req, res) => {
+  try {
+    await Blog.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+      message: "Blog silindi",
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      error,
+    });
+  }
+}
