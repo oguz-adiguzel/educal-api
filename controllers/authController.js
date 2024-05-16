@@ -189,8 +189,6 @@ exports.getStudentCount = async (req, res) => {
 exports.getAllUser = async (req, res) => {
   try {
     const users = await User.find();
-    const courses = await Course.find()
-    console.log('courses', courses);
     res.json({ message:'Kullanıcılar getirildi', users:users });
   } catch (error) {
     res.status(500).json({ message: "Sunucu hatası", status: 500 });

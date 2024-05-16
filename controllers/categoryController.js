@@ -24,7 +24,7 @@ exports.getCategory = async(req,res)=>{
 
 exports.deleteCategory = async (req, res) => {
   try {
-    await Category.findByIdAndRemove(req.params.id);
+    await Category.findByIdAndDelete(req.params.id);
     res.status(200).json({message:'Kategori silindi'})
   } catch (error) {
     res.status(400).json({
