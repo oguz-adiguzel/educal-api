@@ -22,7 +22,7 @@ exports.createCourse = async (req, res) => {
       user: req.body.user,
       photoUrl: result.secure_url,
       videoID: req.body.videoID,
-      confirm:false
+      confirmCourse:'false'
     });
     const addedCourse = await Course.findOne({ photoUrl: result.secure_url });
     const user = await User.findById(req.body.user);
@@ -153,7 +153,7 @@ exports.releaseCourse = async (req, res) => {
 
 exports.deleteCourse = async (req, res) => {
   try {
-    const deletedCourse = await Course.findByIdAndDelete({
+    const deletedCourse = await Course.findOneAndDelete({
       slug: req.params.slug,
     });
     const students = await User.find({
@@ -215,7 +215,7 @@ exports.getCoursesCount = async (req, res) => {
 exports.confirmCours = async (req, res) => {
   try {
     const course = await Course.findOne({id: req.params.id});
-    console.log('course', course);
+    console.log('course', course.confirm);
     course.confirm = true
     course.save();
     res.status(200).json({ message: "Kurs Onaylandı" });

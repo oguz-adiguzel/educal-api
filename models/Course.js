@@ -37,8 +37,8 @@ const CourseSchema = new Schema({
     type: String,
     required: true,
   },
-  confirm: {
-    type: Boolean,
+  confirmCourse: {
+    type: String,
   },
   comments: [],
 });
