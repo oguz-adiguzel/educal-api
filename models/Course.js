@@ -37,7 +37,11 @@ const CourseSchema = new Schema({
     type: String,
     required: true,
   },
-  comments : []
+  confirm: {
+    type: Boolean,
+    default: false,
+  },
+  comments: [],
 });
 
 CourseSchema.pre("validate", function (next) {

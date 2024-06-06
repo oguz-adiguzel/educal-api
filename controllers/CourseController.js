@@ -23,7 +23,7 @@ exports.createCourse = async (req, res) => {
       photoUrl: result.secure_url,
       videoID: req.body.videoID,
     });
-    const addedCourse = await Course.findOne({ photoUrl: result.secure_url })
+    const addedCourse = await Course.findOne({ photoUrl: result.secure_url });
     const user = await User.findById(req.body.user);
     await user.courses.push({ _id: addedCourse._id });
     await user.save();
@@ -203,7 +203,21 @@ exports.getCoursesCount = async (req, res) => {
       .status(200)
       .json({ message: "Kurs sayısı getirildi", coursesCount: count });
   } catch (error) {
-    console.log('error', error);
+    console.log("error", error);
+    res.status(400).json({
+      status: "fail",
+      error,
+    });
+  }
+};
+
+exports.confirmCours = async (req, res) => {
+  try {
+    const course = await Course.findById(req.params.id);
+    course.confirm = true
+    course.save();
+    res.status(200).json({ message: "Kurs Onaylandı" });
+  } catch (error) {
     res.status(400).json({
       status: "fail",
       error,
