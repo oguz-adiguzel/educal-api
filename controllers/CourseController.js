@@ -153,7 +153,7 @@ exports.releaseCourse = async (req, res) => {
 
 exports.deleteCourse = async (req, res) => {
   try {
-    const deletedCourse = await Course.findOneAndRemove({
+    const deletedCourse = await Course.findByIdAndDelete({
       slug: req.params.slug,
     });
     const students = await User.find({
