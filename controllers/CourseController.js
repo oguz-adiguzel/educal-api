@@ -216,7 +216,7 @@ exports.confirmCours = async (req, res) => {
   try {
     const course = await Course.findOne({id: req.params.id});
     console.log('course', course.confirm);
-    course.confirm = true
+    course.confirmCourse = 'true'
     course.save();
     res.status(200).json({ message: "Kurs Onaylandı" });
   } catch (error) {
