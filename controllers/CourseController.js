@@ -22,6 +22,7 @@ exports.createCourse = async (req, res) => {
       user: req.body.user,
       photoUrl: result.secure_url,
       videoID: req.body.videoID,
+      confirm:false
     });
     const addedCourse = await Course.findOne({ photoUrl: result.secure_url });
     const user = await User.findById(req.body.user);
@@ -213,7 +214,8 @@ exports.getCoursesCount = async (req, res) => {
 
 exports.confirmCours = async (req, res) => {
   try {
-    const course = await Course.findById(req.params.id);
+    const course = await Course.findOne({id: req.params.id});
+    console.log('course', course);
     course.confirm = true
     course.save();
     res.status(200).json({ message: "Kurs Onaylandı" });

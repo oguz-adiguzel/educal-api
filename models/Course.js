@@ -39,7 +39,6 @@ const CourseSchema = new Schema({
   },
   confirm: {
     type: Boolean,
-    default: false,
   },
   comments: [],
 });
