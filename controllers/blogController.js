@@ -32,7 +32,7 @@ exports.createBlog = async (req, res) => {
 
 exports.getAllBlog = async (req, res) => {
     try{
-        const blog = await Blog.find()
+        const blog = await Blog.find().sort("-createdAt")
         res.status(200).json({message:'Bloglar getirildi' ,blogs: blog})
       }catch(error){
         console.log('error', error);
