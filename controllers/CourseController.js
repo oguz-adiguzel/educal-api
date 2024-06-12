@@ -213,9 +213,8 @@ exports.getCoursesCount = async (req, res) => {
 
 exports.confirmCours = async (req, res) => {
   try {
-    const course = await Course.findOne({slug: req.body.slug});
-    console.log('course', course);
-    course.confirmCourse = true
+    const course = await Course.findOne({ slug: req.body.slug });
+    course.confirmCourse = true;
     course.save();
     res.status(200).json({ message: "Kurs Onaylandı" });
   } catch (error) {
@@ -225,3 +224,4 @@ exports.confirmCours = async (req, res) => {
     });
   }
 };
+
